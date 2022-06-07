@@ -43,7 +43,7 @@ class App extends Component {
     //------------Medviation Production ----------//
     //this.baseUrl = "https://developer-crmapay.cs214.force.com/"
     //------ CRMEXPRESS------//
-    this.baseUrl = "http://crmaxpress-updateattribute.cs169.force.com/";
+    this.baseUrl = "https://crmaxpress-updateattribute.cs169.force.com/";
     this.urlPaymentLinkId = queryParams.get("Id");
     const current = new Date();
     this.todaysDate = `${current.getFullYear()}-${
