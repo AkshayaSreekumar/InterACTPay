@@ -1221,7 +1221,8 @@ class App extends Component {
     }
     else{
       //this.payingAmount = this.state.OrderTotal;
-      this.maketransAmount = JSON.stringify(this.state.dueAmount);
+      //this.maketransAmount = JSON.stringify(this.state.dueAmount);
+      this.maketransAmount = JSON.stringify(this.state.OrderTotal);
     }
     console.log("transactionParams.Amount = this.maketransAmount;"+this.maketransAmount);
     //var amount = '"'+ this.payingAmount+  '"';
