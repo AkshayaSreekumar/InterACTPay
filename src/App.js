@@ -2385,7 +2385,7 @@ class App extends Component {
                   <div class="col-sm-1">
                     <input
                       placeholder="MM"
-                      type="number"
+                      type=""
                       class="form-control"
                       id="inputEmail4"
                       name="expMonth"
@@ -2397,7 +2397,7 @@ class App extends Component {
                   <div class="col-sm-1">
                     <input
                       placeholder="YY"
-                      type="number"
+                      type=""
                       class="form-control expDate"
                       id="inputEmail4"
                       name="expYear"
@@ -2411,7 +2411,7 @@ class App extends Component {
                   <div class="col-sm-1">
                     <input
                       placeholder="CVV"
-                      type="number"
+                      type=""
                       class="form-control ml-5"
                       id="inputEmail4"
                       name="cardCVV"
