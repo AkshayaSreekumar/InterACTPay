@@ -1268,7 +1268,7 @@ class App extends Component {
         this.transIdUrl = response;
         localStorage.setItem('RandomKey', this.idempotencyKey);
        
-        //this.updatePaymentLinkRecord();
+        this.updatePaymentLinkRecord();
         if(this.redirectUrl){
           this.navigateTo(this.redirectUrl);
         }
