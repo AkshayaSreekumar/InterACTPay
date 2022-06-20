@@ -35,7 +35,7 @@ class App extends Component {
   // ];
 
     //-------- InterACTPay Dev  ------//
-   // this.baseUrl="https://crma-pay-developer-edition.na163.force.com/"
+      this.baseUrl="https://crma-pay-developer-edition.na163.force.com/"
     //-------- Medviation Dev  ------//
     //this.baseUrl="https://crmapay-developer-edition.na213.force.com/";
     //------------Medviation Dev Sandbox ----------//
@@ -43,7 +43,7 @@ class App extends Component {
     //------------Medviation Production ----------//
     //this.baseUrl = "https://developer-crmapay.cs214.force.com/"
     //------ CRMEXPRESS------//
-    this.baseUrl = "https://crmaxpress-updateattribute.cs169.force.com/";
+    //this.baseUrl = "https://crmaxpress-updateattribute.cs169.force.com/";
     this.urlPaymentLinkId = queryParams.get("Id");
     const current = new Date();
     this.todaysDate = `${current.getFullYear()}-${
@@ -147,6 +147,7 @@ class App extends Component {
     //localStorage.setItem('RandomKey', this.idempotencyKey);
   }
   getPaymentLinkDetails(){
+    console.log("Test");
     console.log("Invoked getPaymentLinkDetails-*****--->"+this.urlPaymentLinkId);
     var payLinkParams = {};
     payLinkParams.paymentLinkId = this.urlPaymentLinkId;
