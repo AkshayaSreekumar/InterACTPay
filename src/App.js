@@ -1082,18 +1082,18 @@ class App extends Component {
         achpaymentMethodId;
       console.log("transactionUrl-->" + transactionUrl);
     }
-    // if (this.paymentMethodId) {
-    //   var transactionUrl =
-    //     "https://api.stripe.com/v1/payment_intents" +
-    //     "?amount=" +
-    //     conAmount +
-    //     "&currency=usd&customer=" +
-    //     this.customerId +
-    //     "&payment_method=" +
-    //     this.paymentMethodId +
-    //     "&confirm=true";
-    //   console.log("transactionUrl-->" + transactionUrl);
-    // }
+    if (this.paymentMethodId) {
+      var transactionUrl =
+        "https://api.stripe.com/v1/payment_intents" +
+        "?amount=" +
+        conAmount +
+        "&currency=usd&customer=" +
+        this.customerId +
+        "&payment_method=" +
+        this.paymentMethodId +
+        "&confirm=true";
+      console.log("transactionUrl-->" + transactionUrl);
+    }
     fetch(transactionUrl, {
       method: "POST",
       headers: {
