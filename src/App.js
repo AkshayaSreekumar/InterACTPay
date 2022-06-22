@@ -166,7 +166,7 @@ class App extends Component {
       .then((response) => {
         response = response.slice(1, response.length - 1);
         console.log("response-->y------>"+response);
-        this.getFieldsetData()
+        //this.getFieldsetData()
         var apiResponse = [];
           apiResponse = JSON.parse(response);
           console.log("apiResponse-->y------>"+apiResponse);
@@ -189,6 +189,7 @@ class App extends Component {
         this.urlmail = this.url.searchParams.get("mail");
         this.createdDate = apiResponse.CreatedDate;
         console.log("this.createdDate--->"+this.createdDate);
+        this.getFieldsetData()
         //**************************************************************//
        // var inputDate = '2022-04-28T03:51:50.417-07:00'
         let date = new Date( Date.parse(this.createdDate) );
@@ -275,7 +276,7 @@ class App extends Component {
   getFieldsetData(){
     console.log("Invoked getFieldsetData");
     var ipParams = {};
-    ipParams.inputId = this.urlPaymentLinkId;
+    ipParams.inputId = this.urlOrderId;
     var url =
       this.baseUrl +
       "InteractPay/services/apexrest/crma_pay/InterACTPayAuthorizationUpdated/?methodType=GET&inputParams=" +
@@ -291,11 +292,11 @@ class App extends Component {
       .then((response) => response.text())
       .then((response) => {
         response = response.slice(1, response.length - 1);
-        console.log("response-->y------>"+response);
+        console.log("getFieldsetData-->y------>"+response);
         var Reponse = JSON.parse(response);
         console.log("Reponse" + JSON.stringify(Reponse));
-        console.log("Reponse#########"+Reponse[0].Amount_Due__c);
-        this.dueAmount = Reponse[0].Amount_Due__c;
+        console.log("Reponse#########"+Reponse[0].vlocity_cmt__EffectiveOrderTotal__c);
+        this.dueAmount = Reponse[0].vlocity_cmt__EffectiveOrderTotal__c;
         this.setState({ dueAmount: this.dueAmount });
         console.log("#########"+this.state.dueAmount);
       })
@@ -1281,12 +1282,6 @@ class App extends Component {
             this.navigateTo(this.failedUrl);
           }
         }
-        // if(this.redirectUrl){
-        //   this.navigateTo(this.redirectUrl);
-        // }
-        // else{
-        //   this.setState({ expiredLink: true });
-        // }
         }
         console.log(" create  transaction-->" + JSON.stringify(response));
           //this.navigateTo(redirectUrl);
@@ -1765,13 +1760,15 @@ class App extends Component {
     //onloadeddata();
   }
   selectedTotalAmount(event){
+    this.setState({otherPayment: false,});
     console.log("Invoked Selected amount");
     document.querySelector(".otherAmountClss").value = '';
     this.setState({showPayButton:true,})
     this.setState({errorMsg: false,});
     //this.transactionAmount = '"'+ this.state.OrderTotal+  '"';
     //this.transactionAmount = '"'+ this.state.dueAmount+  '"';
-    this.transactionAmount =  this.state.OrderTotal;
+    //this.transactionAmount =  this.state.OrderTotal;
+    this.transactionAmount =  this.state.dueAmount;
     this.maketransAmount = '"'+ this.transactionAmount+  '"';
     this.maketransAmount = JSON.stringify(this.transactionAmount);
     console.log("Invoked this.maketransAmount"+this.maketransAmount);
@@ -1906,17 +1903,17 @@ class App extends Component {
                     <p>Order Total :</p>
                   </div>
                   <div class="col-6">
-                    <p>$ {this.state.OrderTotal}</p>
+                    <p>$ {this.state.dueAmount}</p>
                   </div>
                 </div>
-                {this.state.dueAmount ? (<div class="row">
+                {/* {this.state.dueAmount ? (<div class="row">
                   <div class="col-6">
                     <p>Amount Due :</p>
                   </div>
                   <div class="col-6">
                     <p>$ {this.state.dueAmount}</p>
                   </div>
-                </div>) : ("")}
+                </div>) : ("")} */}
                 {this.state.patientName ? (<div class="row">
                   <div class="col-6">
                     <p>Patient Name :</p>
@@ -2252,7 +2249,7 @@ class App extends Component {
                         class="form-check-input"
                         type="radio"
                         name="flexRadioDefault"
-                        value = {this.state.OrderTotal}
+                        value = {this.state.dueAmount}
                         id="flexRadioDefault1" checked ={!this.state.otherPayment}
                         disabled={!this.state.paymentdisabled}
                         onClick={(event) =>
@@ -2265,8 +2262,8 @@ class App extends Component {
                     <p> Due Amount</p>
                   </div>
                   <div class="col">
-                  <p class="text-right">$ {this.state.OrderTotal}</p>
-                    {/* <p class="text-right">$ {this.state.dueAmount}</p> */}
+                  {/* <p class="text-right">$ {this.state.OrderTotal}</p> */}
+                    <p class="text-right">$ {this.state.dueAmount}</p>
                   </div>
                   </div>
                   </label>
