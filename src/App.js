@@ -1049,6 +1049,7 @@ class App extends Component {
    
     this.payingAmount = this.transactionAmount;
     if(this.maketransAmount){
+      console.log("inside if --->"+this.maketransAmount);
       this.payingAmount = this.maketransAmount;
     }
     // else{
@@ -1056,7 +1057,8 @@ class App extends Component {
     //   this.payingAmount = this.state.dueAmount
     // }
     else{
-      this.transactionAmount =  this.state.OrderTotal;
+      //this.transactionAmount =  this.state.OrderTotal;
+      this.transactionAmount =  this.state.dueAmount;
       this.maketransAmount = '"'+ this.transactionAmount+  '"';
       this.maketransAmount = JSON.stringify(this.transactionAmount);
       this.payingAmount = this.maketransAmount;
