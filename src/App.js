@@ -1274,7 +1274,7 @@ class App extends Component {
         console.log("transactionstatus-->"+transactionstatus);
         if(transactionstatus=="succeeded"){
           console.log("inside iffffffff");
-          this.setState({ expiredLink: true });
+          //this.setState({ expiredLink: true });
           this.navigateTo(this.redirectUrl);
         }else{
           if(transactionstatus=="failed"){
