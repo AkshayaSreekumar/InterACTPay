@@ -35,7 +35,7 @@ class App extends Component {
   // ];
 
     //-------- InterACTPay Dev  ------//
-      //this.baseUrl="https://crma-pay-developer-edition.na163.force.com/"
+      this.baseUrl="https://crma-pay-developer-edition.na163.force.com/"
     //-------- Medviation Dev  ------//
     //this.baseUrl="https://crmapay-developer-edition.na213.force.com/";
     //------------Medviation Dev Sandbox ----------//
@@ -43,7 +43,7 @@ class App extends Component {
     //------------Medviation Production ----------//
     //this.baseUrl = "https://developer-crmapay.cs214.force.com/"
     //------ CRMEXPRESS------//
-    this.baseUrl = "https://crmaxpress-updateattribute.cs169.force.com/";
+    //this.baseUrl = "https://crmaxpress-updateattribute.cs169.force.com/";
     this.urlPaymentLinkId = queryParams.get("Id");
     const current = new Date();
     this.todaysDate = `${current.getFullYear()}-${
@@ -329,6 +329,8 @@ class App extends Component {
         this.stripeKey = mdt_Reponse.StripeKey;
         this.brandLogo = mdt_Reponse.BrandLogo;
         this.redirectUrl = mdt_Reponse.transactionRedirectUrl;
+        this.failedUrl = mdt_Reponse.transactionFailedUrl;
+        console.log("failedurl-->"+this.failedUrl);
         this.setState({ brandLogo: this.brandLogo });
         console.log("this.brandLogo--->" + this.brandLogo);
       })
@@ -1269,19 +1271,22 @@ class App extends Component {
         localStorage.setItem('RandomKey', this.idempotencyKey);
        
         this.updatePaymentLinkRecord();
-        if(this.redirectUrl){
-          this.navigateTo(this.redirectUrl);
-        }
-        else{
+        console.log("transactionstatus-->"+transactionstatus);
+        if(transactionstatus=="succeeded"){
+          console.log("inside iffffffff");
           this.setState({ expiredLink: true });
+          this.navigateTo(this.redirectUrl);
+        }else{
+          if(transactionstatus=="failed"){
+            this.navigateTo(this.failedUrl);
+          }
         }
-        //localStorage.setItem('currentPage', this.currentPage);
-        // Med production
-       //var redirectUrl = 'https://developer-medviation.cs214.force.com/xchng/s/invoice-page'+'?transId=' + this.transIdUrl;
-        //var redirectUrl = 'https://medviation.force.com/xchng/s/invoice-page'+'?transId=' + this.transIdUrl ;
-        // Med dev
-        // var redirectUrl = 'https://medviation-developer-edition.na213.force.com/s/invoice-page'+'?transId=' + this.transIdUrl;
-        // console.log("invoked redirecturl"+redirectUrl);
+        // if(this.redirectUrl){
+        //   this.navigateTo(this.redirectUrl);
+        // }
+        // else{
+        //   this.setState({ expiredLink: true });
+        // }
         }
         console.log(" create  transaction-->" + JSON.stringify(response));
           //this.navigateTo(redirectUrl);
