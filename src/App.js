@@ -43,7 +43,8 @@ class App extends Component {
     //------------Medviation Production ----------//
     //this.baseUrl = "https://developer-crmapay.cs214.force.com/"
     //------ CRMEXPRESS------//
-    this.baseUrl = "https://crmaxpress-updateattribute.cs169.force.com/";
+    //this.baseUrl = "https://crmaxpress-updateattribute.cs169.force.com/";
+    this.baseUrl = "https://crmaxpress20--crmaxpress.sandbox.my.salesforce-sites.com/"
     this.urlPaymentLinkId = queryParams.get("Id");
     const current = new Date();
     this.todaysDate = `${current.getFullYear()}-${
@@ -509,7 +510,7 @@ class App extends Component {
       });
   }
   getOrderDetails(orderId) {
-    console.log("Invoked Order details--->"+this.redirectURL);
+    console.log("Invoked Order details-orderId-->"+orderId);
     var orderParams = {};
     orderParams.orderId = orderId;
     //orderParams.orderId = this.urlOrderId;
@@ -519,7 +520,8 @@ class App extends Component {
       this.baseUrl +
       "InteractPay/services/apexrest/crma_pay/InterACTPayAuthorizationUpdated/?methodType=GET&inputParams=" +
       JSON.stringify(orderParams);
-    console.log("this.order url ---->" + url);
+      //console.log("111111111----"+url);
+    //console.log("this.order url ---->" + url);
     fetch(url, {
       method: "GET",
       headers: {
@@ -529,6 +531,7 @@ class App extends Component {
     })
       .then((response) => response.text())
       .then((response) => {
+        //console.log("order respnse----");
         response = response.slice(1, response.length - 1);
         //console.log("RESponse    ------>", response);
         var contactReponse = JSON.parse(response);
