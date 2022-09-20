@@ -129,6 +129,7 @@ class App extends Component {
     };
   }
   componentDidMount() {
+    console.log("invoked componentDidMount");
     this.createRandomKey();
     this.getPaymentLinkDetails();
      //this.getOrderDetails();
